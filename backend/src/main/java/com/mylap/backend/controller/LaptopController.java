@@ -5,6 +5,7 @@ import com.mylap.backend.repository.LaptopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -24,4 +25,18 @@ public class LaptopController {
     public List<Laptop> getAllLaptops() {
         return laptopRepository.findAll();
     }
+    @PutMapping("/{id}")
+    public Laptop updateLaptop(@PathVariable String id, @RequestBody Laptop updatedLaptop) {
+
+    Laptop laptop = laptopRepository.findById(id).orElse(null);
+
+    if (laptop != null) {
+        laptop.setBrand(updatedLaptop.getBrand());
+        laptop.setPrice(updatedLaptop.getPrice());
+
+        return laptopRepository.save(laptop);
+    }
+
+    return null;
+}
 }
