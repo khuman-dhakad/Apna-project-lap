@@ -31,3 +31,24 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Java build files
+target/
+*.class
+
+# Maven
+.mvn/
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
