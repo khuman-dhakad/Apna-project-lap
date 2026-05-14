@@ -71,3 +71,71 @@ const TermsOfService = () => {
               Verification may be required for certain transactions.
             </p>
           </section>
+                    <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              4. Seller Responsibilities
+            </h2>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              4.1 Accurate Listings
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Sellers must provide accurate details, specifications,
+              condition, and images of laptops.
+            </p>
+
+            <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+              <li>Brand and model information</li>
+              <li>Physical condition details</li>
+              <li>Usage history</li>
+              <li>Included accessories</li>
+              <li>Clear product photos</li>
+            </ul>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              4.2 Legal Ownership
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Sellers must legally own the products they list.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              4.3 Data Security
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed">
+              Sellers must remove personal data before selling devices.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              5. Buyer Responsibilities
+            </h2>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              5.1 Due Diligence
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Buyers should review listings carefully before purchase.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              5.2 Payment
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Payments must be completed securely through the platform.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              5.3 Inspection Period
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed">
+              Buyers have 48 hours after delivery to report issues.
+            </p>
+          </section>
