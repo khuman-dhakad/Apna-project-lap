@@ -218,3 +218,88 @@ const TermsOfService = () => {
               Resolution decisions by the platform are considered final.
             </p>
           </section>
+                    <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              9. Limitation of Liability
+            </h2>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              MyLappy acts only as a marketplace platform and is not
+              responsible for product quality, delivery delays, or user disputes.
+            </p>
+
+            <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+              <li>Product quality issues</li>
+              <li>Incorrect listing information</li>
+              <li>Shipping delays</li>
+              <li>Buyer-seller disputes</li>
+            </ul>
+
+            <p className="text-gray-700 leading-relaxed">
+              Liability is limited to service fees related to the transaction.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              10. Account Termination
+            </h2>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Accounts may be suspended for fraud, abuse, or repeated
+              violations of platform policies.
+            </p>
+
+            <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+              <li>Fraudulent activities</li>
+              <li>Repeated policy violations</li>
+              <li>Abuse of other users</li>
+              <li>Failure to pay fees</li>
+            </ul>
+
+            <p className="text-gray-700 leading-relaxed">
+              Users can also request account deletion through support.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              11. Governing Law
+            </h2>
+
+            <p className="text-gray-700 leading-relaxed">
+              These Terms are governed by the laws of India and disputes
+              fall under the jurisdiction of New Delhi courts.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              12. Contact Information
+            </h2>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              For questions regarding these Terms, contact us:
+            </p>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-gray-700">
+                <strong>Email:</strong> legal@mylappy.com
+              </p>
+
+              <p className="text-gray-700">
+                <strong>Phone:</strong> +91 9876543210
+              </p>
+
+              <p className="text-gray-700">
+                <strong>Address:</strong> MyLappy, New Delhi, India
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TermsOfService;
