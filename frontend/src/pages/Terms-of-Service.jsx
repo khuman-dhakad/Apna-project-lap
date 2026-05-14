@@ -139,3 +139,82 @@ const TermsOfService = () => {
               Buyers have 48 hours after delivery to report issues.
             </p>
           </section>
+                    <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              6. Transactions and Payments
+            </h2>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              6.1 Payment Processing
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Payments are securely processed through trusted payment
+              providers.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              6.2 Service Fees
+            </h3>
+
+            <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+              <li>Seller fee: 3%</li>
+              <li>Payment processing fee: 2.5%</li>
+              <li>No buyer fees</li>
+            </ul>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              6.3 Refunds and Returns
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed">
+              Users can request returns within 7 days if products differ
+              significantly from listings.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              7. Prohibited Activities
+            </h2>
+
+            <ul className="list-disc pl-6 text-gray-700 leading-relaxed space-y-1">
+              <li>Selling stolen products</li>
+              <li>Creating fake listings</li>
+              <li>Fraudulent activity</li>
+              <li>User harassment</li>
+              <li>Spamming messages</li>
+              <li>Violating platform security</li>
+            </ul>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              8. Dispute Resolution
+            </h2>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              8.1 Platform Mediation
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              MyLappy provides mediation support between buyers and
+              sellers.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              8.2 Resolution Timeline
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Disputes should be reported within 7 days.
+            </p>
+
+            <h3 className="text-xl font-medium text-gray-900 mb-3">
+              8.3 Final Decision
+            </h3>
+
+            <p className="text-gray-700 leading-relaxed">
+              Resolution decisions by the platform are considered final.
+            </p>
+          </section>
