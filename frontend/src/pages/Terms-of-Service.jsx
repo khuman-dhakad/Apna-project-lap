@@ -292,7 +292,7 @@ const TermsOfService = () => {
               </p>
 
               <p className="text-gray-700">
-                <strong>Address:</strong> MyLappy, New Delhi, India
+                <strong>Address:</strong> MyLappy, Bhopal, India
               </p>
             </div>
           </section>
