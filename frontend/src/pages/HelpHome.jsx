@@ -1,3 +1,4 @@
+import React from 'react';
 import { MessageCircle, RotateCcw, Truck, Shield, Phone, Mail, Clock, Users } from 'lucide-react';
 
 const HelpHome = ({ onSectionChange }) => {
