@@ -1,7 +1,8 @@
 package com.mylap.backend.controller;
 
 import com.mylap.backend.model.Laptop;
-import com.mylap.backend.repository.LaptopRepository;
+// import com.mylap.backend.repository.LaptopRepository;
+import com.mylap.backend.service.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,29 +15,28 @@ import java.util.List;
 public class LaptopController {
 
     @Autowired
-    private LaptopRepository laptopRepository;
+    private LaptopService laptopService; 
 
     @PostMapping
     public Laptop saveLaptop(@RequestBody Laptop laptop) {
-        return laptopRepository.save(laptop);
+    return laptopService.saveLaptop(laptop);
     }
 
     @GetMapping
     public List<Laptop> getAllLaptops() {
-        return laptopRepository.findAll();
+    return laptopService.getAllLaptops();
     }
-    @PutMapping("/{id}")
-    public Laptop updateLaptop(@PathVariable String id, @RequestBody Laptop updatedLaptop) {
+   @PutMapping("/{id}")
+   public Laptop updateLaptop(@PathVariable String id,
+                           @RequestBody Laptop updatedLaptop) {
 
-    Laptop laptop = laptopRepository.findById(id).orElse(null);
-
-    if (laptop != null) {
-        laptop.setBrand(updatedLaptop.getBrand());
-        laptop.setPrice(updatedLaptop.getPrice());
-
-        return laptopRepository.save(laptop);
+    return laptopService.updateLaptop(id, updatedLaptop);
     }
+    @DeleteMapping("/{id}")
+    public String deleteLaptop(@PathVariable String id) {
 
-    return null;
-}
+    laptopService.deleteLaptop(id);
+
+    return "Laptop Deleted Successfully";
+    }
 }
