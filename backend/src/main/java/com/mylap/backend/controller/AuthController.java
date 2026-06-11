@@ -1,5 +1,6 @@
 package com.mylap.backend.controller;
 
+import com.mylap.backend.model.LoginResponse;
 import com.mylap.backend.model.LoginRequest;
 import com.mylap.backend.model.User;
 import com.mylap.backend.service.UserService;
@@ -20,11 +21,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User loginUser(@RequestBody LoginRequest loginRequest) {
+    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest) {
 
-        return userService.loginUser(
-                loginRequest.getEmail(),
-                loginRequest.getPassword()
-        );
-    }
+    return userService.loginUser(
+            loginRequest.getEmail(),
+            loginRequest.getPassword()
+    );
+   }
 }
