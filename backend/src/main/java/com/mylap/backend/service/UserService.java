@@ -1,5 +1,6 @@
 package com.mylap.backend.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.mylap.backend.security.JwtUtil;
 import com.mylap.backend.model.LoginResponse;
 import com.mylap.backend.model.User;
@@ -16,6 +17,9 @@ private UserRepository userRepository;
 @Autowired
 private JwtUtil jwtUtil;
 
+@Autowired
+private BCryptPasswordEncoder passwordEncoder;
+
 public User registerUser(User user) {
 
     User existingUser = userRepository.findByEmail(user.getEmail());
@@ -23,6 +27,12 @@ public User registerUser(User user) {
     if (existingUser != null) {
         return null;
     }
+
+    user.setPassword(
+            passwordEncoder.encode(user.getPassword())
+    );
+
+    user.setRole("ROLE_USER");
 
     return userRepository.save(user);
 }
@@ -43,8 +53,10 @@ public LoginResponse loginUser(String email, String password) {
     }
 
     if (user != null
-            && user.getPassword() != null
-            && user.getPassword().equals(password)) {
+        && passwordEncoder.matches(
+                password,
+                user.getPassword()
+        )) {
 
         String token = jwtUtil.generateToken(user.getEmail());
 
