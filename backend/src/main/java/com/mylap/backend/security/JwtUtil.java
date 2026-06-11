@@ -9,7 +9,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-private final String SECRET_KEY = "mysecretkey123mysecretkey123mysecretkey123123456789";
+    private final String SECRET_KEY =
+            "mysecretkey123mysecretkey123mysecretkey123123456789";
 
     public String generateToken(String email) {
 
@@ -25,12 +26,31 @@ private final String SECRET_KEY = "mysecretkey123mysecretkey123mysecretkey123123
                 )
                 .compact();
     }
+
     public String extractEmail(String token) {
 
-    return Jwts.parser()
-            .setSigningKey(SECRET_KEY)
-            .parseClaimsJws(token)
-            .getBody()
-            .getSubject();
-   }
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
+    public boolean validateToken(String token) {
+
+        try {
+
+            Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token);
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Invalid JWT Token");
+
+            return false;
+        }
+    }
 }

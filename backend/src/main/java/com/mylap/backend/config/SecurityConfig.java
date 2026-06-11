@@ -1,5 +1,6 @@
 package com.mylap.backend.config;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.mylap.backend.security.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,27 @@ public class SecurityConfig {
 
        http
         .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated()
+       .authorizeHttpRequests(auth -> auth
+
+        .requestMatchers("/auth/**").permitAll()
+
+        .requestMatchers(org.springframework.http.HttpMethod.GET,
+                "/laptops/**")
+        .hasAnyRole("USER", "ADMIN")
+
+        .requestMatchers(org.springframework.http.HttpMethod.POST,
+                "/laptops/**")
+        .hasRole("ADMIN")
+
+        .requestMatchers(org.springframework.http.HttpMethod.PUT,
+                "/laptops/**")
+        .hasRole("ADMIN")
+
+        .requestMatchers(org.springframework.http.HttpMethod.DELETE,
+                "/laptops/**")
+        .hasRole("ADMIN")
+
+        .anyRequest().authenticated()
         )
         .addFilterBefore(
                 jwtFilter,
@@ -30,4 +49,8 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+   }
 }

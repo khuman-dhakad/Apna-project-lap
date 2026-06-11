@@ -1,5 +1,10 @@
 package com.mylap.backend.security;
 
+import com.mylap.backend.model.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.mylap.backend.repository.UserRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -16,6 +21,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserRepository userRepository;
 
    @Override
 protected void doFilterInternal(
@@ -35,14 +43,36 @@ protected void doFilterInternal(
 
     System.out.println("Authorization Header: " + authHeader);
 
-    if (authHeader != null && authHeader.startsWith("Bearer ")) {
+   if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
-        String token = authHeader.substring(7);
+    String token = authHeader.substring(7);
 
-        String email = jwtUtil.extractEmail(token);
+    if (jwtUtil.validateToken(token)) {
 
-        System.out.println("Email From Token: " + email);
-    }
+    String email = jwtUtil.extractEmail(token);
+
+    System.out.println("Email From Token: " + email);
+
+    User user = userRepository.findByEmail(email);
+
+    System.out.println("Role From DB: " + user.getRole());
+
+    UsernamePasswordAuthenticationToken authentication =
+            new UsernamePasswordAuthenticationToken(
+                    email,
+                    null,
+                    java.util.List.of(
+                            new org.springframework.security.core.authority.SimpleGrantedAuthority(
+                                    user.getRole()
+                            )
+                    )
+            );
+
+    SecurityContextHolder
+            .getContext()
+            .setAuthentication(authentication);
+}
+}
 
     filterChain.doFilter(request, response);
    }
