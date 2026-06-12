@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Mail, Lock, User, Eye, EyeOff, Chrome, AlertCircle } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+
+import React, { useState } from "react";
+import { Mail, Lock, User, Eye, EyeOff, Globe, AlertCircle } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 const AuthForm = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);

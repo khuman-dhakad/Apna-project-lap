@@ -7,8 +7,8 @@ import {
   Clock, MapPin, Phone, ArrowLeft
 } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
-import { db } from "../firebaseconfig";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+// import { db } from "../firebaseconfig";
+// import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 const ProductDetailPage = () => {
   const { id } = useParams();

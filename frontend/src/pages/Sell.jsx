@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Upload, Camera, X, DollarSign, Check, ChevronLeft, ChevronRight } from 'lucide-react';
-import { db } from "../firebaseconfig";
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+// import { db } from "../firebaseconfig";
+// import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const Sell = () => {
   const [currentStep, setCurrentStep] = useState(1);
