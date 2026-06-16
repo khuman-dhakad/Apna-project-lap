@@ -1,5 +1,6 @@
 package com.mylap.backend.controller;
 
+import jakarta.validation.Valid;
 import com.mylap.backend.model.LoginResponse;
 import com.mylap.backend.model.LoginRequest;
 import com.mylap.backend.model.User;
@@ -16,7 +17,7 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
+    public User registerUser(@Valid @RequestBody User user) {
         return userService.registerUser(user);
     }
 
