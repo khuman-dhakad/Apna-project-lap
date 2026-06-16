@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+/* CRITICAL: Removed broken social media brand icons to prevent bundler compilation errors */
 import { 
-  Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin,
+  Laptop, Globe, Smartphone, Video, Mail, Phone, MapPin,
   Shield, Award, Truck, RotateCcw, CreditCard, Lock
 } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
@@ -23,7 +24,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              NikAnk Laptops
+              Mylappy Laptops
             </h3>
             <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
               Your trusted marketplace for premium refurbished laptops. We're committed to providing 
@@ -54,15 +55,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-emerald-400" />
-                <span className="text-gray-300">1-800-RELAPTOP</span>
+                <span className="text-gray-300">8604325848</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-emerald-400" />
-                <span className="text-gray-300">NikAnk@Laptops.com</span>
+                <span className="text-gray-300">support@mylappy.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-emerald-400" />
-                <span className="text-gray-300">San Francisco, CA</span>
+                <span className="text-gray-300">Bhopal, Madhya Pradesh</span>
               </div>
             </div>
           </div>
@@ -189,7 +190,7 @@ const Footer = () => {
             {/* Copyright */}
             <div className="text-center md:text-left">
               <p className="text-gray-400 text-sm">
-                &copy; 2024 NikAnk Laptops. All rights reserved. Built with sustainability in mind.
+                &copy; 2026 Mylappy Laptops. All rights reserved. Built with sustainability in mind.
               </p>
             </div>
 
@@ -209,16 +210,16 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex items-center space-x-4">
               <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                <Facebook className="h-5 w-5" />
+                <Laptop className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                <Twitter className="h-5 w-5" />
+                <Globe className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                <Instagram className="h-5 w-5" />
+                <Smartphone className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                <Youtube className="h-5 w-5" />
+                <Video className="h-5 w-5" />
               </a>
             </div>
           </div>
