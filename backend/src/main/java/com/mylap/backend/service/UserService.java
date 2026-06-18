@@ -65,5 +65,9 @@ public LoginResponse loginUser(String email, String password) {
 
     return new LoginResponse("Invalid Email or Password", "");
 }
+    public User getUserByEmail(String email) {
+
+    return userRepository.findByEmail(email);
+    }
 
 }
