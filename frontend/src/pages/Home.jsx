@@ -3,27 +3,6 @@ import { ArrowRight, Shield, Award, Truck, Star, TrendingUp, Users, Zap } from '
 import { useApp } from '../contexts/AppContext';
 import ProductCard from '../components/ProductCard';
 
-// import { db } from "../firebaseconfig";
-// import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-
-// const [listings, setListings] = useState([]);
-
-// useEffect(() => {
-//   const fetchListings = async () => {
-//     const q = query(collection(db, "listings"), orderBy("createdAt", "desc"));
-//     const snapshot = await getDocs(q);
-//     setListings(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-//   };
-//   fetchListings();
-// }, []);
-// {listings.map(listing => (
-//   <div key={listing.id}>
-//     <h2>{listing.title}</h2>
-//     <p>{listing.brand} - {listing.model}</p>
-//     {/* aur jo info dikhani ho */}
-//   </div>
-// ))}
-
 const HomePage = () => {
   const { state } = useApp();
   

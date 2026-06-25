@@ -3,10 +3,11 @@ import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useAuth();
+  // FIX: Destructure 'user' state correctly from AuthContext
+  const { user } = useAuth();
 
-  // Agar user login nahi hai, to redirect karo home ya login page pe
-  return currentUser ? <>{children}</> : <Navigate to="/" />;
+  // Agar user login nahi hai, to automatically home page pe redirect karo
+  return user ? <>{children}</> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

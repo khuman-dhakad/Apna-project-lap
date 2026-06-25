@@ -1,29 +1,9 @@
-// import { useEffect, useState } from "react";
-
-// function App() {
-
-//   const [message, setMessage] = useState("");
-
-//   useEffect(() => {
-//     fetch("http://localhost:8080/hello")
-//       .then((res) => res.text())
-//       .then((data) => setMessage(data));
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>{message}</h1>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute'; // Import our guard
 
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
@@ -49,21 +29,16 @@ import Reals from './components/Reals';
 
 const App = () => {
   return (
-    <AppProvider>
-      <AuthProvider>
-        <Router>
+    <Router>
+      <AppProvider>
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="products" element={<ProductsPage />} />
               <Route path="product/:id" element={<ProductDetailPage />} />
               <Route path="cart" element={<CartPage />} />
-              <Route path="wishlist" element={<WishlistPage />} />
               <Route path="deals" element={<ProductsPage />} />
-              <Route path="sell" element={<Sell />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="settings" element={<Settings />} />
               <Route path="reals" element={<Reals />} />
               <Route path="ShippingInfo" element={<ShippingInfo />} />
               <Route path="Warranty" element={<Warranty />} />
@@ -72,12 +47,20 @@ const App = () => {
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
               <Route path="terms-of-service" element={<TermsOfService />} />
               <Route path="cookie-policy" element={<CookiePolicy />} />
+              
+              {/* PROTECTED ROUTES: Wrapped user-only pages inside ProtectedRoute */}
+              <Route path="wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
+              <Route path="sell" element={<ProtectedRoute><Sell /></ProtectedRoute>} />
+              <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+              <Route path="settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+              
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
-        </Router>
-      </AuthProvider>
-    </AppProvider>
+        </AuthProvider>
+      </AppProvider>
+    </Router>
   );
 };
 
