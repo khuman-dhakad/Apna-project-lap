@@ -86,7 +86,7 @@ const FilterSidebar = () => {
         processors: [],
         ramSizes: [],
         storageTypes: [],
-        priceRange: [0, 5000],
+        priceRange: [0, 100000],
         minRating: 0,
         batteryHealth: 0,
         inStockOnly: false,

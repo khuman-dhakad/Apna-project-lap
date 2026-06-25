@@ -7,6 +7,8 @@ import {
   Clock, MapPin, Phone, ArrowLeft
 } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
+
+// Firebase imports remain commented out as requested
 // import { db } from "../firebaseconfig";
 // import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
@@ -21,6 +23,7 @@ const ProductDetailPage = () => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [listings, setListings] = useState([]);
 
+  // Sync route param ID to component product layout
   useEffect(() => {
     if (id) {
       const foundProduct = state.products.find(p => p.id === id);
@@ -33,14 +36,21 @@ const ProductDetailPage = () => {
     }
   }, [id, state.products, navigate, state.wishlist]);
 
+  // ✅ FIREBASE LOGIC SAFELY COMMENTED OUT inside a controlled useEffect
   useEffect(() => {
+    /*
     const fetchListings = async () => {
-      const q = query(collection(db, "listings"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      setListings(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      try {
+        const q = query(collection(db, "listings"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        setListings(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      } catch (error) {
+        console.error("Error fetching listings: ", error);
+      }
     };
     fetchListings();
-  }, []);
+    */
+  }, []); // Empty dependency array prevents loops
 
   if (!product) {
     return (

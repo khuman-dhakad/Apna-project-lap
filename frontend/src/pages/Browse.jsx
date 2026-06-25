@@ -14,7 +14,7 @@ const Browse = () => {
     priceRange: '',
     processor: '',
     ram: '',
-    storage: '' hwfdfsvhvbjhdsvckdnmdcb 
+    storage: ''
   });
   const [sortBy, setSortBy] = useState('newest');
 

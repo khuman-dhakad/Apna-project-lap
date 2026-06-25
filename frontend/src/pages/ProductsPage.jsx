@@ -14,6 +14,9 @@ const ProductsPage = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [showFilters, setShowFilters] = useState(false);
 
+  // DEBUG: यहाँ कंसोल करके देखें कि हुक से सच में क्या डेटा आ रहा है
+  console.log("Filtered Products from Hook:", filteredProducts);
+
   // Handle URL parameters
   useEffect(() => {
     const category = searchParams.get('category');
@@ -39,26 +42,32 @@ const ProductsPage = () => {
   };
 
   const getSortedProducts = () => {
-    let sorted = [...filteredProducts];
+    // अगर डेटाबेस से एरे नहीं बल्कि undefined आता है, तो खाली एरे फॉलबैक काम करेगा
+    let sorted = [...(filteredProducts || [])];
     
-    switch (state.filters.sortBy) {
+    switch (state?.filters?.sortBy) {
       case 'price-low':
-        return sorted.sort((a, b) => a.price - b.price);
+        return sorted.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
       case 'price-high':
-        return sorted.sort((a, b) => b.price - a.price);
+        return sorted.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
       case 'rating':
-        return sorted.sort((a, b) => b.rating - a.rating);
+        return sorted.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
       case 'newest':
-        return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        return sorted.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
       default:
         return sorted.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     }
   };
 
   const sortedProducts = getSortedProducts();
-  const totalPages = Math.ceil(sortedProducts.length / state.itemsPerPage);
-  const startIndex = (state.currentPage - 1) * state.itemsPerPage;
-  const paginatedProducts = sortedProducts.slice(startIndex, startIndex + state.itemsPerPage);
+  
+  // सेफ डिफ़ॉल्ट वैल्यूज ताकि क्रैश न हो
+  const itemsPerPage = state?.itemsPerPage || 9;
+  const currentPage = state?.currentPage || 1;
+  
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
 
   if (isLoading) {
     return (
@@ -104,7 +113,7 @@ const ProductsPage = () => {
                 </h1>
                 <p className="text-gray-600 mt-1">
                   {sortedProducts.length} laptop{sortedProducts.length !== 1 ? 's' : ''} found
-                  {state.searchQuery && (
+                  {state?.searchQuery && (
                     <span> for "{state.searchQuery}"</span>
                   )}
                 </p>
@@ -129,7 +138,7 @@ const ProductsPage = () => {
 
                 {/* Sort Dropdown */}
                 <select 
-                  value={state.filters.sortBy}
+                  value={state?.filters?.sortBy || 'featured'}
                   onChange={(e) => handleSortChange(e.target.value)}
                   className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
                 >
@@ -143,7 +152,7 @@ const ProductsPage = () => {
             </div>
 
             {/* Active Filters */}
-            {(state.filters.brands.length > 0 || state.filters.grades.length > 0 || state.searchQuery) && (
+            {(state?.filters?.brands?.length > 0 || state?.filters?.grades?.length > 0 || state?.searchQuery) && (
               <div className="mb-6 p-4 bg-white rounded-lg border border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-sm font-medium text-gray-900">Active Filters:</h3>
@@ -158,7 +167,7 @@ const ProductsPage = () => {
                           processors: [],
                           ramSizes: [],
                           storageTypes: [],
-                          priceRange: [0, 5000],
+                          priceRange: [0, 100000], // ✅ FIX: यहाँ डिफ़ॉल्ट रेंज 100,000 कर दी है ताकि आपके महंगे लैपटॉप छुपें नहीं
                           minRating: 0,
                           batteryHealth: 0,
                           inStockOnly: false,
@@ -172,17 +181,17 @@ const ProductsPage = () => {
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {state.searchQuery && (
+                  {state?.searchQuery && (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
                       Search: {state.searchQuery}
                     </span>
                   )}
-                  {state.filters.brands.map(brand => (
+                  {state?.filters?.brands?.map(brand => (
                     <span key={brand} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                       Brand: {brand}
                     </span>
                   ))}
-                  {state.filters.grades.map(grade => (
+                  {state?.filters?.grades?.map(grade => (
                     <span key={grade} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                       Grade: {grade}
                     </span>
@@ -197,7 +206,7 @@ const ProductsPage = () => {
             ) : (
               <div className="space-y-4">
                 {paginatedProducts.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div key={product.id || product._id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <ProductCard product={product} />
                   </div>
                 ))}
@@ -208,8 +217,8 @@ const ProductsPage = () => {
             {totalPages > 1 && (
               <div className="mt-12 flex items-center justify-center space-x-2">
                 <button
-                  onClick={() => dispatch({ type: 'SET_PAGE', payload: Math.max(1, state.currentPage - 1) })}
-                  disabled={state.currentPage === 1}
+                  onClick={() => dispatch({ type: 'SET_PAGE', payload: Math.max(1, currentPage - 1) })}
+                  disabled={currentPage === 1}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Previous
@@ -220,7 +229,7 @@ const ProductsPage = () => {
                     key={page}
                     onClick={() => dispatch({ type: 'SET_PAGE', payload: page })}
                     className={`px-4 py-2 border rounded-lg text-sm font-medium ${
-                      page === state.currentPage
+                      page === currentPage
                         ? 'bg-emerald-600 text-white border-emerald-600'
                         : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                     }`}
@@ -230,8 +239,8 @@ const ProductsPage = () => {
                 ))}
                 
                 <button
-                  onClick={() => dispatch({ type: 'SET_PAGE', payload: Math.min(totalPages, state.currentPage + 1) })}
-                  disabled={state.currentPage === totalPages}
+                  onClick={() => dispatch({ type: 'SET_PAGE', payload: Math.min(totalPages, currentPage + 1) })}
+                  disabled={currentPage === totalPages}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next

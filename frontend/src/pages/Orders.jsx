@@ -16,7 +16,7 @@ const Orders = () => {
       orderDate: '2024-01-15',
       deliveryDate: '2024-01-18',
       seller: 'Sarah Johnson',
-      trackingNumber: 'TRK123456789'  dsmbfjdfkvbjfvh
+      trackingNumber: 'TRK123456789'
     },
     {
       id: 'ORD-002',

@@ -10,7 +10,7 @@ const ShippingInfo = () => {
       name: 'Standard Shipping',
       time: '5-7 Business Days',
       cost: 'FREE on orders $75+',
-      description: 'Reliable delivery for most orders',hvghcfgxvjhjvcg
+      description: 'Reliable delivery for most orders',
       icon: Package,
       color: 'bg-blue-500',
     },
