@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Shield, Truck, Battery, CheckCircle, Heart } from '
 import { useApp } from '../contexts/AppContext';
 
 const ProductCard = ({ product }) => {
+    console.log("Product:", product);
   const { state, dispatch } = useApp();
   const isWishlisted = state.wishlist.includes(product.id);
 
@@ -47,10 +48,10 @@ const ProductCard = ({ product }) => {
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img
-          src={product.images[0]}
-          alt={product.name}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+  src="https://via.placeholder.com/400x250?text=Laptop"
+  alt={product.brand}
+  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+/>
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col space-y-2">
@@ -101,9 +102,11 @@ const ProductCard = ({ product }) => {
       <div className="p-4">
         {/* Title and Brand */}
         <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors duration-200 line-clamp-2">
-          {product.name}
+          {product.brand}
         </h3>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-1">{product.condition}</p>
+        <p className="text-sm text-gray-600 mb-3">
+  Refurbished Laptop
+</p>
 
         {/* Key Specs */}
         <div className="grid grid-cols-2 gap-2 mb-3 text-xs text-gray-600">

@@ -1,24 +1,3 @@
-// export interface HelpSection {
-//   id: string;
-//   title: string;
-//   icon: string;
-//   description: string;
-// }
-
-// export interface FAQ {
-//   id: string;
-//   question: string;
-//   answer: string;
-//   category: string;
-// }
-
-// export interface ContactForm  {
-//   name: string;
-//   email: string;
-//   subject: string;
-//   message: string;
-//   orderNumber?: string;
-// }
 
 /**
  * @typedef {Object} HelpSection

@@ -4,7 +4,7 @@ import { Package, Clock, CheckCircle, AlertCircle, ArrowRight, RefreshCw } from 
 const ReturnsRefunds = () => {
   const [activeTab, setActiveTab] = useState('policy');
 
-  const returnSteps = [
+  const returnSteps = [iuvvgtcrtfdfdghbng 
     {
       step: 1,
       title: 'Initiate Return',

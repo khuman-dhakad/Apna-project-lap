@@ -9,15 +9,6 @@ import AuthForm from './AuthForm';
 import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
-  const handleSignOut = async () => {
-    try {
-      await logout();
-      setDropdownOpen(false);
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
-
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { state, dispatch } = useApp();
   const navigate = useNavigate();
@@ -26,8 +17,25 @@ const Header = () => {
   const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const userMenuRef = useRef(null);
-  const { currentUser, logout } = useAuth();
+  
+  // CRITICAL FIX: Match variable name 'user' with AuthContext state
+  const { user, logout } = useAuth(); 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Check login using AuthContext directly instead of state.isAuthenticated
+  const isUserAuthenticated = !!user; 
+
+  const handleSignOut = async () => {
+    try {
+      await logout();
+      setIsUserMenuOpen(false);
+      setIsMobileUserMenuOpen(false);
+      setDropdownOpen(false);
+      navigate('/'); // Redirect to home on signout
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   const cartItemsCount = state.cart.reduce((total, item) => total + item.quantity, 0);
   const unreadNotifications = state.notifications.filter(n => !n.read).length;
@@ -145,7 +153,7 @@ const Header = () => {
                 </nav>
 
                 {/* Wishlist */}
-                {state.isAuthenticated && (
+                {isUserAuthenticated && (
                   <Link
                     to="/wishlist"
                     className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
@@ -160,7 +168,7 @@ const Header = () => {
                 )}
 
                 {/* Notifications */}
-                {state.isAuthenticated && (
+                {isUserAuthenticated && (
                   <Link
                     to="/notifications"
                     className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
@@ -193,25 +201,25 @@ const Header = () => {
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className="flex items-center space-x-2 p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
                   >
-                    {state.user?.avatar ? (
+                    {user?.avatar ? (
                       <img
-                        src={state.user.avatar}
-                        alt={state.user.name}
+                        src={user.avatar}
+                        alt={user.email}
                         className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : (
                       <User className="h-6 w-6" />
                     )}
-                    {state.user && <span className="text-sm font-medium hidden lg:block">{state.user.name}</span>}
+                    {user && <span className="text-sm font-medium hidden lg:block">{user.email.split('@')[0]}</span>}
                     <ChevronDown className="h-4 w-4" />
                   </button>
 
                   {isUserMenuOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                      {state.isAuthenticated ? (
+                      {isUserAuthenticated ? (
                         <>
                           <Link
-                            to="/Profile"
+                            to="/profile"
                             className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             onClick={() => setIsUserMenuOpen(false)}
                           >
@@ -254,7 +262,7 @@ const Header = () => {
                           <Link
                             to="/register"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            onClick={handleLogin}
+                            onClick={() => setIsUserMenuOpen(false)}
                           >
                             Create Account
                           </Link>
@@ -306,7 +314,8 @@ const Header = () => {
                 </Link>
                 <Link
                   to="/sell"
-                  className="text-gray-700 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Sell
                 </Link>
@@ -319,22 +328,22 @@ const Header = () => {
                 </Link>
 
                 <div className="border-t border-gray-200 pt-4">
-                  {state.isAuthenticated && (
+                  {isUserAuthenticated && (
                     <div className="relative">
                       <button
                         onClick={() => setIsMobileUserMenuOpen(!isMobileUserMenuOpen)}
                         className="flex items-center space-x-2 px-3 py-2 w-full text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-md"
                       >
-                        {state.user?.avatar ? (
+                        {user?.avatar ? (
                           <img
-                            src={state.user.avatar}
-                            alt={state.user.name}
+                            src={user.avatar}
+                            alt={user.email}
                             className="h-8 w-8 rounded-full object-cover"
                           />
                         ) : (
                           <User className="h-6 w-6" />
                         )}
-                        <span>{state.user?.name || 'Account'}</span>
+                        <span>{user?.email || 'Account'}</span>
                         <ChevronDown className="h-4 w-4" />
                       </button>
                       {isMobileUserMenuOpen && (
@@ -347,7 +356,7 @@ const Header = () => {
                       )}
                     </div>
                   )}
-                  {!state.isAuthenticated && (
+                  {!isUserAuthenticated && (
                     <>
                       <button
                         onClick={() => {

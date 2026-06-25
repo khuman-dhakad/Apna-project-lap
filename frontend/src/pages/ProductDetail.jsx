@@ -7,7 +7,7 @@ import { useCart } from '../contexts/AppContext';
 const laptopToProduct = (laptop) => {
   return {
     id: laptop.id,
-    name: laptop.title,
+    name: laptop.title,  nfvbhffdjbdcn bcvn dv dxb 
     brand: laptop.brand,
     model: laptop.model,
     price: laptop.price,

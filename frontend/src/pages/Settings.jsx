@@ -12,7 +12,7 @@ const Settings = () => {
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'payment', label: 'Payment', icon: CreditCard },
-    { id: 'preferences', label: 'Preferences', icon: Globe }
+    { id: 'preferences', label: 'Preferences', icon: Globe }nmv v bn
   ];
 
   return (

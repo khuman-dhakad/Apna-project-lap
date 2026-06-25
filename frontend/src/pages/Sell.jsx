@@ -11,7 +11,7 @@ const Sell = () => {
     brand: '',
     model: '',
     year: '',
-    condition: '',
+    condition: '',nbvgcghgh
     price: '',
     originalPrice: '',
     processor: '',
